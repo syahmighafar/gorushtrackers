@@ -289,16 +289,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             }
     
                                             if((json_responsejd.data[0].task_history[i].description.includes('task via bulk'))&&(countassign < 1)&&(countassigned < 1)){
-    
+                                                checkDate()
+
+                                                var para = document.createElement("P" + i);
+                                                para.innerHTML = getTime() + " - " + "<b>Collected</b>" + "<br><br>";
+                                                document.getElementById("trackinghistorydetails").appendChild(para);
+
                                                 countassign = countassign + 1;
                                                 countassigned = countassigned + 1;
-                                                
+                                            
+                                                finaldatewithtime = getFullDateWithDayandTime();
+                                                finalstatus = "Collected";  
                                             }
     
                                             if((json_responsejd.data[0].task_history[i].description.includes('Assigned'))&&(countassign < 1)&&(countassigned < 1)){
-    
+                                                checkDate()
+
+                                                var para = document.createElement("P" + i);
+                                                para.innerHTML = getTime() + " - " + "<b>Collected</b>" + "<br><br>";
+                                                document.getElementById("trackinghistorydetails").appendChild(para);
+
                                                 countassign = countassign + 1;
                                                 countassigned = countassigned + 1;
+                                            
+                                                finaldatewithtime = getFullDateWithDayandTime();
+                                                finalstatus = "Collected";
                                                 
                                             }
     
