@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container" id="message">
+        <div class="row">
+            <div class="col-12" style="text-align: center;">
+                    <br>
+                    <label>Tracking Number: <br><input id="jobid" type="text" style="border-radius: 5px; text-align:center;"></label>
+                    <br><br><button id="trackbutton" onclick="tracknumber()" style="border-radius: 5px;">Track</button> 
+            </div>
+        </div>
+
+        <div class="row" id="trackingresultbox" style="display:none;">
+            <br><hr>
+            <div class="col-12" style="text-align: center;">
+                <h3>TRACKING INFORMATION</h3>
+                    <p><b>Agent Name: </b><br><span id="trackingagentname"></span></p>
+                    <p><b>Tracking Number: </b><br><span id="trackingnumberdetails"></span></p>
+            </div>
+        </div>
+
+        <div class="row" id="trackingresultbox2" style="display:none;">
+            <div class="col-12" style="text-align: center;" id="trackinghistorydetails">
+                <hr><br>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+var responsejd = '';
+var json_responsejd = '';
+var responseo = '';
+var json_responseo = '';
+var responsefp = '';
+var json_responsefp = '';
+var counttaskhistory = 0;
+var request = new XMLHttpRequest();
+
+function tracknumber() {
+        request.open('POST', 'https://api.tookanapp.com/v2/get_job_details');
+    
+        request.setRequestHeader('Content-Type', 'application/json');
+    
+        request.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                console.log('Status:', this.status);
+                console.log('Headers:', this.getAllResponseHeaders());
+                console.log('Body:', this.responseText);
+                responsejd = this.responseText;
+                json_responsejd = JSON.parse(responsejd);
+
+                if(json_responsejd.message = "Successful"){
+                    request.open('POST', 'https://api.tookanapp.com/v2/get_job_details_by_order_id');
+    
+                    request.setRequestHeader('Content-Type', 'application/json');
+
+                    request.onreadystatechange = function () {
+                        if (this.readyState === 4) {
+                            console.log('Status:', this.status);
+                            console.log('Headers:', this.getAllResponseHeaders());
+                            console.log('Body:', this.responseText);
+                            responseo = this.responseText;
+                            json_responseo = JSON.parse(responseo);
+
+                            if(json_responsejd.message = "Successful"){
+                                request.open('POST', 'https://api.tookanapp.com/v2/view_fleet_profile');
+    
+                                request.setRequestHeader('Content-Type', 'application/json');
+
+                                request.onreadystatechange = function () {
+                                    if (this.readyState === 4) {
+                                    console.log('Status:', this.status);
+                                    console.log('Headers:', this.getAllResponseHeaders());
+                                    console.log('Body:', this.responseText);
+                                    responsefp = this.responseText;
+                                    json_responsefp = JSON.parse(responsefp);
+
+                                    id="trackingresultbox"
+
+                                    document.getElementById("trackingresultbox").style.display = 'inline';
+                                    document.getElementById("trackingresultbox2").style.display = 'inline';
+                                    document.getElementById("trackingagentname").innerHTML = json_responsefp.data.fleet_details[0].username;
+                                    document.getElementById("trackingnumberdetails").innerHTML = json_responsejd.data[0].job_id;
+
+                                    counttaskhistory = json_responsejd.data[0].task_history["length"];
+
+                                    for(let i = 0; i  < counttaskhistory; i++){
+
+                                        if(json_responsejd.data[0].task_history[i].description.includes('Modified')){
+                                            if(json_responsejd.data[0].job_status==2){
+
+                                                var para = document.createElement("P" + i);
+                                                para.innerHTML = "Successful" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Successful" + "<br><br>";
+                                                document.getElementById("trackinghistorydetails").appendChild(para);
+                                            }
+
+                                            if(json_responsejd.data[0].job_status==3){
+
+                                                var para = document.createElement("P" + i);
+                                                para.innerHTML = "Failed" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Failed" + "<br><br>";
+                                                document.getElementById("trackinghistorydetails").appendChild(para);
+                                            }
+
+
+                                        }
+
+                                        //var para = document.createElement("P" + i);
+                                        //para.innerHTML = json_responsejd.data[0].task_history[i].label_description + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + json_responsejd.data[0].task_history[i].description + "<br><br>";
+                                        //document.getElementById("trackinghistorydetails").appendChild(para);
+
+
+                                        if(json_responsejd.data[0].task_history[i].description.includes('Created By')){
+
+                                            var para = document.createElement("P" + i);
+                                            para.innerHTML = "Consignor" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Order Placed" + "<br><br>";
+                                            document.getElementById("trackinghistorydetails").appendChild(para);
+                                        }
+
+                                        if(json_responsejd.data[0].task_history[i].description.includes('Accepted at')){
+
+                                            var para = document.createElement("P" + i);
+                                            para.innerHTML = "Acknowledged" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Arrived in Go Rush" + "<br><br>";
+                                            document.getElementById("trackinghistorydetails").appendChild(para);
+
+                                            var para = document.createElement("P1" + i);
+                                            para.innerHTML = "Go Rush Sorting Facility" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Go Rush Sorting Facility" + "<br><br>";
+                                            document.getElementById("trackinghistorydetails").appendChild(para);
+                                        }
+
+                                        if(json_responsejd.data[0].task_history[i].description.includes('Started at')){
+
+                                            var para = document.createElement("P" + i);
+                                            para.innerHTML = "Out For Delivery" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Out For Delivery" + "<br><br>";
+                                            document.getElementById("trackinghistorydetails").appendChild(para);
+                                        }
+
+                                        if(json_responsejd.data[0].task_history[i].description.includes('Arrived at')){
+
+                                            var para = document.createElement("P" + i);
+                                            para.innerHTML = "Arrived" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Arrived" + "<br><br>";
+                                            document.getElementById("trackinghistorydetails").appendChild(para);
+                                        }
+
+                                        if(json_responsejd.data[0].task_history[i].description.includes('Successful at')){
+
+                                            var para = document.createElement("P" + i);
+                                            para.innerHTML = "Successful" + " : " + json_responsejd.data[0].task_history[i].creation_datetime + " : " + "Successful" + "<br><br>" + "<b>Address: </b>" + "<br>" + json_responsejd.data[0].job_address + "<br><br>" + "<b>Consignee Detail: </b>" + "<br>" + json_responsejd.data[0].customer_username + "<br><br>";
+                                            document.getElementById("trackinghistorydetails").appendChild(para);
+                                        }
+                                    }
+
+                                    }
+                                };
+
+                                var body = {
+                                    'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                                    'fleet_id': [json_responsejd.data[0].fleet_id],
+                                };
+
+                                request.send(JSON.stringify(body));
+                            }
+                        }
+                    };
+
+                    var body = {
+                    'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+                    'order_ids': [json_responsejd.data[0].job_id],
+                    'include_task_history': 1
+                    };
+
+                    request.send(JSON.stringify(body));
+                }
+            }
+        };
+    
+        var body = {
+          'api_key': '51676580f24b091114132d38111925401ee4c2f328d978375e1f03',
+          'job_ids': [document.getElementById("jobid").value],
+          'include_task_history': 1
+        };
+    
+        request.send(JSON.stringify(body));
+    }
+      //298869376
+    </script>
+</body>
+</html>
