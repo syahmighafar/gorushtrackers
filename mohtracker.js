@@ -206,8 +206,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             }
     
                                             if(json_responsejd.data[0].task_history[i].label_description.includes('Status updated from')){
-                                                checkDate()
+                                                
                                                 if(json_responsejd.data[0].task_history[i].description.includes('to Failed')){
+                                                    checkDate()
     
                                                     var para = document.createElement("P" + i);
                                                     para.setAttribute("id", "faileddelivery2" + i);
@@ -224,6 +225,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                                 }
     
                                                 if(json_responsejd.data[0].task_history[i].description.includes('to Successful')){
+                                                    checkDate()
     
                                                     var para = document.createElement("P" + i);
                                                     para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
@@ -234,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                                 }
     
                                                 if(json_responsejd.data[0].task_history[i].description.includes('to Unassigned')){
+                                                    checkDate()
     
                                                     var para = document.createElement("P" + i);
                                                     para.innerHTML = getTime() + " - " + "<b>Processing</b>" + "<br><br>";
@@ -248,8 +251,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             }
                                             
                                             if(json_responsejd.data[0].task_history[i].description.includes('Modified')){
-                                            checkDate()
+                                            
                                             if(json_responsejd.data[0].job_status==2){
+                                                checkDate()
 
                                                 var para = document.createElement("P" + i);
                                                 para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
@@ -260,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             }
 
                                             if(json_responsejd.data[0].job_status==3){
+                                                checkDate()
 
                                                 var para = document.createElement("P" + i);
                                                 para.setAttribute("id", "faileddelivery3" + i);
