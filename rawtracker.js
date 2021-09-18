@@ -329,7 +329,7 @@ function tracknumber(){
                                             if(countaccept < 1){
 
                                                 var para = document.createElement("P" + i);
-                                                para.innerHTML = getTime() + " - " + json_responsejd.data[0].task_history[i].description+ "<br><br>";
+                                                para.innerHTML = getTime() + " - " + "Accepted by " + agentname+ "<br><br>";
                                                 document.getElementById("trackinghistorydetails").appendChild(para);
 
                                                
@@ -341,7 +341,7 @@ function tracknumber(){
                                             if(countfacility < 1){
 
                                                 var para = document.createElement("P" + i);
-                                                para.innerHTML = getTime() + " - " + json_responsejd.data[0].task_history[i].description + "<br><br>";
+                                                para.innerHTML = getTime() + " - " +  "Accepted by " + agentname+ "<br><br>";
                                                 document.getElementById("trackinghistorydetails").appendChild(para);
 
                                           
@@ -355,7 +355,7 @@ function tracknumber(){
                                             checkDate()
 
                                             var para = document.createElement("P" + i);
-                                            para.innerHTML = getTime() + " - " + json_responsejd.data[0].task_history[i].description + "<br><br>";
+                                            para.innerHTML = getTime() + " - " + "Started by " + agentname+ "<br><br>";
                                             document.getElementById("trackinghistorydetails").appendChild(para);
 
                                             countfacility = 0;
@@ -368,7 +368,7 @@ function tracknumber(){
                                             checkDate()
 
                                             var para = document.createElement("P" + i);
-                                            para.innerHTML = getTime() + " -  " +json_responsejd.data[0].task_history[i].description + "<br><br>";
+                                            para.innerHTML = getTime() + " -  " + "Arrived at " + agentname+ "<br><br>";
                                             document.getElementById("trackinghistorydetails").appendChild(para);
 
                                             countfacility = 0;
@@ -402,7 +402,7 @@ function tracknumber(){
 
                                             var para = document.createElement("P" + i);
                                             para.setAttribute("id", "successdelivery" + i);
-                                            para.innerHTML = getTime() + " - " + json_responsejd.data[0].task_history[i].description + "<br><br>";
+                                            para.innerHTML = getTime() + " - " + "Successful by " + agentname+ "<br><br>";
                                             document.getElementById("trackinghistorydetails").appendChild(para);
                                             document.getElementById("successdelivery" + i).style.color = "#009933";
                                             
