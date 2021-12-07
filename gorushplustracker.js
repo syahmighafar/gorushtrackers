@@ -299,28 +299,28 @@ function tracknumber(){
                                             checkDate()
 
                                             var para = document.createElement("P" + i);
-                                            para.innerHTML = getTime() + " - " + "Arrived in Brunei International Airport, <b>Undergoing Custom Clearance</b>" + "<br><br>";
+                                            para.innerHTML = getTime() + " - " + "Arrived in Kuala Lumpur Hub" + "<br><br>";
                                             document.getElementById("trackinghistorydetails").appendChild(para);
 
                                             countassign = countassign + 1;
                                             countassigned = countassigned + 1;
                                             
                                             finaldatewithtime = getFullDateWithDayandTime();
-                                            finalstatus = "Undergoing Custom Clearance";
+                                            finalstatus = "Arrived in Kuala Lumpur Hub";
                                         }
 
                                         if((json_responsejd.data[0].task_history[i].description.includes('Assigned'))&&(countassign < 1)&&(countassigned < 1)){
                                             checkDate()
 
                                             var para = document.createElement("P" + i);
-                                            para.innerHTML = getTime() + " - " + "Arrived in Brunei International Airport, <b>Undergoing Custom Clearance</b>" + "<br><br>";
+                                            para.innerHTML = getTime() + " - " + "Arrived in Kuala Lumpur Hub" + "<br><br>";
                                             document.getElementById("trackinghistorydetails").appendChild(para);
 
                                             countassign = countassign + 1;
                                             countassigned = countassigned + 1;
                                             
                                             finaldatewithtime = getFullDateWithDayandTime();
-                                            finalstatus = "Undergoing Custom Clearance";
+                                            finalstatus = "Arrived in Kuala Lumpur Hub";
                                         }
 
                                         if(json_responsejd.data[0].task_history[i].description.includes('Accepted at')){
@@ -329,7 +329,7 @@ function tracknumber(){
                                             if(countaccept < 1){
 
                                                 var para = document.createElement("P" + i);
-                                                para.innerHTML = getTime() + " - " + "<b>Arrived in Go Rush</b>" + "<br><br>";
+                                                para.innerHTML = getTime() + " - " + "Arrived in Brunei International Airport, <b>Undergoing Custom Clearance</b>" + "<br><br>";
                                                 document.getElementById("trackinghistorydetails").appendChild(para);
 
                                                 countaccept = countaccept + 1;
@@ -337,19 +337,13 @@ function tracknumber(){
                                                 countassigned = countassigned + 1;
                                                 
                                                 finaldatewithtime = getFullDateWithDayandTime();
-                                                finalstatus = "Arrived in Go Rush";
+                                                finalstatus = "Undergoing Custom Clearance";
                                             }
 
                                             if(countfacility < 1){
 
-                                                var para = document.createElement("P" + i);
-                                                para.innerHTML = getTime() + " - " + "<b>Go Rush Sorting Facility</b>" + "<br><br>";
-                                                document.getElementById("trackinghistorydetails").appendChild(para);
-
                                                 countfacility = countfacility + 1;
-                                                
-                                                finaldatewithtime = getFullDateWithDayandTime();
-                                                finalstatus = "Go Rush Sorting Facility";
+
                                             }
                                         }
 
@@ -390,13 +384,6 @@ function tracknumber(){
                                             
                                             finaldatewithtime = getFullDateWithDayandTime();
                                             finalstatus = " <b>Agent's Note: </b>" + json_responsejd.data[0].task_history[i].description;
-                                        }
-                                        
-                                        if(json_responsejd.data[0].task_history[i].type.includes('signature_image_added')){
-
-                                            imguploaded = json_responsejd.data[0].task_history[i].description;
-
-                                            countfacility = 0;
                                         }
 
                                         if(json_responsejd.data[0].task_history[i].description.includes('Successful at')){
