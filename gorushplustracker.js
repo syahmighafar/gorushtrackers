@@ -423,10 +423,6 @@ function tracknumber(){
                                         document.getElementById("laststatusdetails").style.color = "#009933";
                                         document.getElementById("addressdetails").innerHTML = json_responsejd.data[0].job_address;
                                         document.getElementById("consigneedetails").innerHTML = json_responsejd.data[0].customer_username;
-                                        var img = document.createElement('img');
-                                        img.setAttribute("id", "imguploadedsign");
-                                        img.src = imguploaded;
-                                        document.getElementById('imguploadedp').appendChild(img);
                                         
                                         document.getElementById("successfuldeliveryarea").style.display = 'block';
                                     }
@@ -446,7 +442,6 @@ function tracknumber(){
                                         document.getElementById("trackagain").style.display = 'none';
                                         document.getElementById("trackingnumberarea").style.display = 'block';
                                         document.getElementById("trackinghistorydetails").innerHTML = "";
-                                        document.getElementById("imguploadedp").innerHTML = "";
                                         document.getElementById("trackingresultbox").style.display = 'none';
                                         document.getElementById("trackingresultbox2").style.display = 'none';
                                         document.getElementById("successfuldeliveryarea").style.display = 'none';
