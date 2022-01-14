@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function (event) {
 	document.getElementById("trackbutton").addEventListener("click", tracknumber);
 
@@ -434,16 +435,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
 												finalstatus = "Failed Delivery";
 											}
 
+											if (json_responsejd.data[0].task_history[i].description.includes('Self Collect')) {
+												checkDate()
+
+												var para = document.createElement("P" + i);
+												para.setAttribute("id", "successdelivery" + i);
+												para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
+												document.getElementById("trackinghistorydetails").appendChild(para);
+												document.getElementById("successdelivery" + i).style.color = "#009933";
+
+												finaldatewithtime = getFullDateWithDayandTime();
+												finalstatus = "Successful";
+												counts = counts + 1;
+											}
+
 										}
 
 										if (counts == 1) {
 											document.getElementById("laststatusdetails").style.color = "#009933";
 											document.getElementById("addressdetails").innerHTML = json_responsejd.data[0].job_address;
 											document.getElementById("consigneedetails").innerHTML = json_responsejd.data[0].customer_username;
-											var img = document.createElement('img');
-											img.setAttribute("id", "imguploadedsign");
-											img.src = imguploaded;
-											document.getElementById('imguploadedp').appendChild(img);
+
+											if (imguploaded.length == 0) {
+												document.getElementById("customerSign").style.display = 'none';
+											}
+
+											if (imguploaded.length != 0) {
+												var img = document.createElement('img');
+												img.setAttribute("id", "imguploadedsign");
+												img.src = imguploaded;
+												document.getElementById('imguploadedp').appendChild(img);
+
+												document.getElementById("customerSign").style.display = 'block';
+											}
 
 											document.getElementById("successfuldeliveryarea").style.display = 'block';
 										}
@@ -463,7 +487,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 											document.getElementById("trackagain").style.display = 'none';
 											document.getElementById("trackingnumberarea").style.display = 'block';
 											document.getElementById("trackinghistorydetails").innerHTML = "";
-											document.getElementById("imguploadedp").innerHTML = "";
+
+											if (imguploaded.length != 0) {
+												document.getElementById("imguploadedp").innerHTML = "";
+											}
+
+											if (imguploaded.length == 0) {
+												document.getElementById("customerSign").style.display = 'block';
+											}
+
 											document.getElementById("trackingresultbox").style.display = 'none';
 											document.getElementById("trackingresultbox2").style.display = 'none';
 											document.getElementById("successfuldeliveryarea").style.display = 'none';
