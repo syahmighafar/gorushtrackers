@@ -250,36 +250,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
 												}
 											}
 
-											if (json_responsejd.data[0].task_history[i].description.includes('Modified')) {
+											// if (json_responsejd.data[0].task_history[i].description.includes('Modified')) {
 
-												if (json_responsejd.data[0].job_status == 2) {
-													checkDate()
+											// 	if (json_responsejd.data[0].job_status == 2) {
+											// 		checkDate()
 
-													var para = document.createElement("P" + i);
-													para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
+											// 		var para = document.createElement("P" + i);
+											// 		para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
+											// 		document.getElementById("trackinghistorydetails").appendChild(para);
 
-													finaldatewithtime = getFullDateWithDayandTime();
-													finalstatus = "Successful";
-												}
+											// 		finaldatewithtime = getFullDateWithDayandTime();
+											// 		finalstatus = "Successful";
+											// 	}
 
-												if (json_responsejd.data[0].job_status == 3) {
-													checkDate()
+											// 	if (json_responsejd.data[0].job_status == 3) {
+											// 		checkDate()
 
-													var para = document.createElement("P" + i);
-													para.setAttribute("id", "faileddelivery3" + i);
-													para.innerHTML = getTime() + " - " + "<b>Failed</b>" + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
-													document.getElementById("faileddelivery3" + i).style.color = "#b30000";
+											// 		var para = document.createElement("P" + i);
+											// 		para.setAttribute("id", "faileddelivery3" + i);
+											// 		para.innerHTML = getTime() + " - " + "<b>Failed</b>" + "<br><br>";
+											// 		document.getElementById("trackinghistorydetails").appendChild(para);
+											// 		document.getElementById("faileddelivery3" + i).style.color = "#b30000";
 
-													var para = document.createElement("P" + i + "fff");
-													para.innerHTML = "<b>Reason: </b>" + json_responsejd.data[0].task_history[i].reason + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
+											// 		var para = document.createElement("P" + i + "fff");
+											// 		para.innerHTML = "<b>Reason: </b>" + json_responsejd.data[0].task_history[i].reason + "<br><br>";
+											// 		document.getElementById("trackinghistorydetails").appendChild(para);
 
-													finaldatewithtime = getFullDateWithDayandTime();
-													finalstatus = "Failed";
-												}
-											}
+											// 		finaldatewithtime = getFullDateWithDayandTime();
+											// 		finalstatus = "Failed";
+											// 	}
+											// }
 
 											if (json_responsejd.data[0].task_history[i].description.includes('Created By')) {
 												checkDate()
