@@ -434,21 +434,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 												finaldatewithtime = getFullDateWithDayandTime();
 												finalstatus = "Failed Delivery";
 											}
-
-											if (json_responsejd.data[0].task_history[i].description.includes('Self Collect')) {
-												checkDate()
-
-												var para = document.createElement("P" + i);
-												para.setAttribute("id", "successdelivery" + i);
-												para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
-												document.getElementById("trackinghistorydetails").appendChild(para);
-												document.getElementById("successdelivery" + i).style.color = "#009933";
-
-												finaldatewithtime = getFullDateWithDayandTime();
-												finalstatus = "Successful";
-												counts = counts + 1;
-											}
-
 										}
 
 										if ((json_responsejd.data[0].job_status == 2) && (counts == 0)) {
