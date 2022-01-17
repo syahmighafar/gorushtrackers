@@ -396,6 +396,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 												finalstatus = "Failed";
 											}
 										}
+										
+										if ((json_responsejd.data[0].job_status == 2) && (counts == 0)) {
+											checkDate()
+											var para = document.createElement("P");
+											para.setAttribute("id", "successdelivery");
+											para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
+											document.getElementById("trackinghistorydetails").appendChild(para);
+											document.getElementById("successdelivery").style.color = "#009933";
+											counts = 1;
+											finaldatewithtime = getFullDateWithDayandTime();
+											finalstatus = "Successful";
+										}
 
 										if (counts == 1) {
 											document.getElementById("laststatusdetails").style.color = "#009933";
