@@ -257,73 +257,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 												}
 											}
 
-											if (json_responsejd.data[0].task_history[i].description.includes('Modified')) {
-												if ((json_responsejd.data[0].job_status == 0) && (countassign < 1) && (countassigned < 1)) {
-													checkDate()
-
-													var para = document.createElement("P" + i);
-													para.innerHTML = getTime() + " - " + "Arrived in Kuala Lumpur Hub" + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
-
-													countassign = countassign + 1;
-													countassigned = countassigned + 1;
-
-													finaldatewithtime = getFullDateWithDayandTime();
-													finalstatus = "Arrived in Kuala Lumpur Hub";
-												}
-
-												if (json_responsejd.data[0].job_status == 2) {
-													checkDate()
-
-													var para = document.createElement("P" + i);
-													para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
-
-													finaldatewithtime = getFullDateWithDayandTime();
-													finalstatus = "Successful";
-												}
-
-												if (json_responsejd.data[0].job_status == 3) {
-													checkDate()
-
-													var para = document.createElement("P" + i);
-													para.setAttribute("id", "faileddelivery3" + i);
-													para.innerHTML = getTime() + " - " + "<b>Failed</b>" + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
-													document.getElementById("faileddelivery3" + i).style.color = "#b30000";
-
-													var para = document.createElement("P" + i + "fff");
-													para.innerHTML = "<b>Reason: </b>" + json_responsejd.data[0].task_history[i].reason + "<br><br>";
-													document.getElementById("trackinghistorydetails").appendChild(para);
-
-													finaldatewithtime = getFullDateWithDayandTime();
-													finalstatus = "Failed";
-												}
-
-												if (json_responsejd.data[0].job_status == 7) {
-													if (countaccept < 1) {
-														checkDate()
-
-														var para = document.createElement("P" + i);
-														para.innerHTML = getTime() + " - " + "Arrived in Brunei International Airport, <b>Undergoing Custom Clearance</b>" + "<br><br>";
-														document.getElementById("trackinghistorydetails").appendChild(para);
-
-														countaccept = countaccept + 1;
-														countassign = countassign + 1;
-														countassigned = countassigned + 1;
-
-														finaldatewithtime = getFullDateWithDayandTime();
-														finalstatus = "Undergoing Custom Clearance";
-													}
-
-													if(countfacility < 1){
-
-														countfacility = countfacility + 1;
-		
-													}
-												}
-											}
-
 											if (json_responsejd.data[0].task_history[i].description.includes('Created By')) {
 												checkDate()
 
@@ -456,6 +389,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 												finalstatus = "Failed Delivery";
 											}
 
+										}
+										
+										if ((json_responsejd.data[0].job_status == 2) && (counts == 0)) {
+											checkDate()
+											var para = document.createElement("P");
+											para.setAttribute("id", "successdelivery");
+											para.innerHTML = getTime() + " - " + "<b>Successful</b>" + "<br><br>";
+											document.getElementById("trackinghistorydetails").appendChild(para);
+											document.getElementById("successdelivery").style.color = "#009933";
+											counts = 1;
+											finaldatewithtime = getFullDateWithDayandTime();
+											finalstatus = "Successful";
 										}
 
 										if (counts == 1) {
