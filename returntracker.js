@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 													checkDate()
 
 													var para = document.createElement("P" + i);
-													para.innerHTML = getTime() + " - " + "Go Rush Status Updated: <b>Successful</b>" + "<br><br>";
+													para.innerHTML = getTime() + " - " + "<b>Arrived in KL</b>" + "<br><br>";
 													document.getElementById("trackinghistorydetails").appendChild(para);
 
 													finaldatewithtime = getFullDateWithDayandTime();
