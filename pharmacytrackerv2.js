@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         var request = new XMLHttpRequest();
 
+        document.getElementById("imguploadedp").innerHTML = "";
         document.getElementById("trackinghistorydetails").innerHTML = "";
         document.getElementById("trackingresultbox").style.display = 'none';
         document.getElementById("trackingresultbox2").style.display = 'none';
