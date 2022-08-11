@@ -417,8 +417,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                                             document.getElementById("lastdaydatetimedetails").innerHTML = finaldatewithtime;
                                             document.getElementById("trackingresultbox").style.display = 'block';
                                             document.getElementById("trackingresultbox2").style.display = 'block';
-
-                                            document.getElementById("trackagain").style.display = 'block';
                                         }
                                     };
 
