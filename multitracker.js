@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     function tracknumber() {
 
-        if (document.getElementById("trackerproduct").value == "Pharmacy Tracking") {
+        if ((document.getElementById("trackerproduct").value == "Pharmacy Tracking")||(document.getElementById("trackerproduct").value == "Local Delivery")) {
             document.getElementById("trackingresultarea").style.display = 'block';
 
             var jobidentitynum = '';
